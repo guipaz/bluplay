@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.Menu;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EditorMenuController : MenuController
 {
@@ -19,6 +20,7 @@ public class EditorMenuController : MenuController
         foreach (var game in DataManager.games)
         {
             var gameCell = Instantiate(gameCellPrefab);
+            gameCell.transform.Find("_GameName").GetComponent<Text>().text = game.name;
             gameCell.transform.SetParent(contentObject.transform);
         }
     }

@@ -1,4 +1,7 @@
-﻿using Assets.Scripts.Menu;
+﻿using Assets.Scripts;
+using Assets.Scripts.Menu;
+using Proyecto26;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +12,7 @@ public class MenuMaster : MonoBehaviour
     void Start()
     {
         ChangeMenu("start");
+        ExecuteRequest();
     }
 
     public void ChangeMenu(string controllerId)
@@ -21,5 +25,26 @@ public class MenuMaster : MonoBehaviour
             else
                 controller.Deactivate();
         }
+    }
+
+    private void ExecuteRequest()
+    {
+        Debug.Log("executing request");
+        RestClient.GetArray<BPGame>("http://localhost:3000/").Then(
+            res =>
+            {
+                try
+                {
+                    foreach (var game in res)
+                    {
+                        Debug.Log(game);
+                        DataManager.AddGame(game);
+                    }
+                } catch (Exception e)
+                {
+                    Debug.Log(e);
+                }
+                
+            });
     }
 }

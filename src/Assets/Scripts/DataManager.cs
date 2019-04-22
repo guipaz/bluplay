@@ -9,8 +9,6 @@ namespace Assets.Scripts
         static DataManager()
         {
             games = new List<BPGame>();
-
-            AddGame(new BPGame());
         }
         
         public static void AddGame(BPGame game)
