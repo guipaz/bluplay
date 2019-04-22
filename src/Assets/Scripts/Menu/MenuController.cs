@@ -4,8 +4,6 @@ namespace Assets.Scripts.Menu
 {
     public abstract class MenuController : MonoBehaviour
     {
-        public GameObject mainPanel;
-
         public abstract string GetId();
 
         public virtual void Activate()

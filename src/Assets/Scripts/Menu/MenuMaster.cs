@@ -8,6 +8,7 @@ public class MenuMaster : MonoBehaviour
 
     void Start()
     {
+        ChangeMenu("start");
     }
 
     public void ChangeMenu(string controllerId)
