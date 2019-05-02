@@ -1,19 +1,16 @@
 ﻿using System.Collections.Generic;
 
-namespace Assets.Scripts
+public static class DataManager
 {
-    public static class DataManager
-    {
-        public static List<BPGame> games { get; private set; }
+    public static List<BPGame> games { get; private set; }
 
-        static DataManager()
-        {
-            games = new List<BPGame>();
-        }
+    static DataManager()
+    {
+        games = new List<BPGame>();
+    }
         
-        public static void AddGame(BPGame game)
-        {
-            games.Add(game);
-        }
+    public static void AddGame(BPGame game)
+    {
+        games.Add(game);
     }
 }

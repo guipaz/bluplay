@@ -1,6 +1,4 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.Menu;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class EditorMenuController : MenuController
@@ -21,17 +19,11 @@ public class EditorMenuController : MenuController
         {
             var gameCell = Instantiate(gameCellPrefab);
             gameCell.transform.Find("_GameName").GetComponent<Text>().text = game.name;
+            gameCell.transform.Find("_GameModel").GetComponent<Text>().text = BPGame.GetModelName(game.model);
             gameCell.transform.SetParent(contentObject.transform);
         }
     }
 
-    public void NewGameClicked()
-    {
-        DataManager.AddGame(new BPGame());
-        Deactivate();
-        Activate();
-    }
-    
     public override void Deactivate()
     {
         base.Deactivate();

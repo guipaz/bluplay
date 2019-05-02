@@ -1,23 +1,40 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.Menu;
-using Proyecto26;
+﻿using Proyecto26;
+using RSG;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuMaster : MonoBehaviour
 {
+    public static MenuMaster _instance;
+
+    public static MenuMaster Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = new MenuMaster();
+            return _instance;
+        }
+    }
+
     public List<MenuController> controllers;
+    public GameObject loadingText;
 
     void Start()
     {
-        ChangeMenu("start");
-        ExecuteRequest();
+        _instance = this;
+
+        loadingText?.SetActive(true);
+        LoadGames().Then(() =>
+        {
+            ChangeMenu("start");
+            loadingText?.SetActive(false);
+        });
     }
 
     public void ChangeMenu(string controllerId)
     {
-        Debug.Log(controllerId);
         foreach (var controller in controllers)
         {
             if (controller.GetId() == controllerId)
@@ -27,10 +44,10 @@ public class MenuMaster : MonoBehaviour
         }
     }
 
-    private void ExecuteRequest()
+    private IPromise LoadGames()
     {
         Debug.Log("executing request");
-        RestClient.GetArray<BPGame>("http://localhost:3000/").Then(
+        return RestClient.GetArray<BPGame>("http://localhost:3000/").Then(
             res =>
             {
                 try
