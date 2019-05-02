@@ -26,11 +26,16 @@ public class MenuMaster : MonoBehaviour
         _instance = this;
 
         loadingText?.SetActive(true);
-        LoadGames().Then(() =>
-        {
-            ChangeMenu("start");
-            loadingText?.SetActive(false);
-        });
+
+        ChangeMenu("start");
+        loadingText?.SetActive(false);
+
+        DataManager.LoadGamesFromFile();
+
+        //LoadGames().Then(() =>
+        //{
+            
+        //});
     }
 
     public void ChangeMenu(string controllerId)
@@ -43,7 +48,7 @@ public class MenuMaster : MonoBehaviour
                 controller.Deactivate();
         }
     }
-
+    
     private IPromise LoadGames()
     {
         Debug.Log("executing request");
