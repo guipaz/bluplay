@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Proyecto26;
+using RSG;
 using UnityEngine;
 
 public static class DataManager
@@ -26,5 +28,18 @@ public static class DataManager
     public static void SaveGamesToFile()
     {
         //TODO
+    }
+
+    public static IPromise<BPGame[]> GetGamesFromCloud()
+    {
+        return RestClient.GetArray<BPGame>("http://localhost:3000/");
+    }
+
+    public static bool ContainsGame(BPGame game)
+    {
+        foreach (var g in games)
+            if (g.uid == game.uid)
+                return true;
+        return false;
     }
 }

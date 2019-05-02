@@ -31,11 +31,6 @@ public class MenuMaster : MonoBehaviour
         loadingText?.SetActive(false);
 
         DataManager.LoadGamesFromFile();
-
-        //LoadGames().Then(() =>
-        //{
-            
-        //});
     }
 
     public void ChangeMenu(string controllerId)
@@ -47,26 +42,5 @@ public class MenuMaster : MonoBehaviour
             else
                 controller.Deactivate();
         }
-    }
-    
-    private IPromise LoadGames()
-    {
-        Debug.Log("executing request");
-        return RestClient.GetArray<BPGame>("http://localhost:3000/").Then(
-            res =>
-            {
-                try
-                {
-                    foreach (var game in res)
-                    {
-                        Debug.Log(game);
-                        DataManager.AddGame(game);
-                    }
-                } catch (Exception e)
-                {
-                    Debug.Log(e);
-                }
-                
-            });
     }
 }

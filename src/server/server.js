@@ -2,8 +2,8 @@ var express = require('express');
 var app = express();
 
 var games = [
-	{ "uid": 1, "name": "Meu primeiro jogo" },
-	{ "uid": 2, "name": "Onde Estou?" },
+	{ "uid": 3, "name": "Meu primeiro jogo", model: 4 },
+	{ "uid": 4, "name": "Onde Estou?", model: 3 },
 ];
 
 var bodyParser = require('body-parser');
