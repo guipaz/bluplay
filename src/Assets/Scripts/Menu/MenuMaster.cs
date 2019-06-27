@@ -21,6 +21,8 @@ public class MenuMaster : MonoBehaviour
     public List<MenuController> controllers;
     public GameObject loadingText;
 
+    bool initialized;
+
     void Start()
     {
         _instance = this;
@@ -29,8 +31,7 @@ public class MenuMaster : MonoBehaviour
 
         ChangeMenu("start");
         loadingText?.SetActive(false);
-
-        DataManager.LoadGamesFromFile();
+        
     }
 
     public void ChangeMenu(string controllerId)

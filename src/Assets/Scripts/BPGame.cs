@@ -11,6 +11,8 @@ public enum GameModel
 [Serializable]
 public class BPGame
 {
+    public static BPGame Current;
+
     public string uid;
     public string name;
     public GameModel model;

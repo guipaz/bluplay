@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,11 +41,19 @@ public class NewGameMenuController : MenuController
             return;
 
         var activeToggle = toggleGroup.ActiveToggles().First();
-        var game = new BPGame()
+
+        BPGame game;
+        var model = GetGameModel(activeToggle.gameObject.name);
+        if (model == GameModel.Puzzle)
         {
-            name = nameField.text.Trim(),
-            model = GetGameModel(activeToggle.gameObject.name)
-        };
+            game = new PuzzleGame();
+        } else
+        {
+            game = new BPGame();
+        }
+
+        game.name = nameField.text.Trim();
+        game.model = model;
 
         DataManager.AddGame(game);
         MenuMaster.Instance.ChangeMenu("editor");

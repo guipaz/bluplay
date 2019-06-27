@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EditorMenuController : MenuController
@@ -21,6 +22,24 @@ public class EditorMenuController : MenuController
             gameCell.transform.Find("_GameName").GetComponent<Text>().text = game.name;
             gameCell.transform.Find("_GameModel").GetComponent<Text>().text = BPGame.GetModelName(game.model);
             gameCell.transform.SetParent(contentObject.transform);
+
+            var cell = gameCell.GetComponent<EditorMenuListCell>();
+            cell.playAction = () =>
+            {
+                if (game.model == GameModel.Puzzle)
+                {
+                    BPGame.Current = game;
+                    SceneManager.LoadScene("PuzzleGameScene");
+                }
+            };
+            cell.editAction = () =>
+            {
+                if (game.model == GameModel.Puzzle)
+                {
+                    BPGame.Current = game;
+                    SceneManager.LoadScene("PuzzleEditScene");
+                }
+            };
         }
     }
 
